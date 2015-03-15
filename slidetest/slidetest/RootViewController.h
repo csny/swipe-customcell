@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTableViewCell.h"
-//#import "TableViewConst.h"
 
-@interface RootViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
+@interface RootViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
  // インスタンス変数iphoneModelsを準備
 @property NSArray *iphoneModels;

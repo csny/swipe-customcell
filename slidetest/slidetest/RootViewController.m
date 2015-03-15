@@ -22,18 +22,12 @@ static NSString * const TableViewCustomCellIdentifier = @"TableViewCustomCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // デリゲートメソッドをこのクラスで実装する
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
     // テーブルに表示したいデータソースをセット
     _iphoneModels = @[@"iPhone 4", @"iPhone 4S", @"iPhone 5", @"iPhone 5c", @"iPhone 5s"];
     
     // カスタマイズしたセルをテーブルビューにセット
     UINib *nib = [UINib nibWithNibName:TableViewCustomCellIdentifier bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"Cell"];
-    //[self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,8 +66,9 @@ static NSString * const TableViewCustomCellIdentifier = @"TableViewCustomCell";
     return [CustomTableViewCell rowHeight];
 }
 
+// 右スワイプ時の動作定義
 - (IBAction)swipedRight:(id)sender {
-    // タップした位置（座標点）を取得します。
+    // スワイプした位置（座標点）を取得します。
     CGPoint pos = [sender locationInView:self.tableView];
     // 座標点から、tableViewのメソッドを使って、NSIndexPathを取得します。
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:pos];
