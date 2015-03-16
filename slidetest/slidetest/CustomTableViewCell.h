@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelSummary;
 @property (weak, nonatomic) IBOutlet UILabel *labelDate;
 
+// クラスメソッド宣言
 + (CGFloat)rowHeight;
 
 @end

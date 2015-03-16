@@ -22,8 +22,8 @@ static NSString * const TableViewCustomCellIdentifier = @"TableViewCustomCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // テーブルに表示したいデータソースをセット
-    _iphoneModels = @[@"iPhone 4", @"iPhone 4S", @"iPhone 5", @"iPhone 5c", @"iPhone 5s"];
+    // テーブルに表示したい配列を用意
+    _iphoneModels = [NSMutableArray arrayWithObjects:@"iPhone 4", @"iPhone 4S", @"iPhone 5", @"iPhone 5c", @"iPhone 5s", @"iPhone 6c", @"iPhone 6 plus", nil];
     
     // カスタマイズしたセルをテーブルビューにセット
     UINib *nib = [UINib nibWithNibName:TableViewCustomCellIdentifier bundle:nil];
@@ -64,6 +64,50 @@ static NSString * const TableViewCustomCellIdentifier = @"TableViewCustomCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [CustomTableViewCell rowHeight];
+}
+
+//UITableViewDelegateに追加された編集・削除メソッドiOS8から
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // 削除ボタン
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"del" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        // 削除ボタンの処理はここ
+        NSLog(@"Delete:%@", indexPath);
+        // 削除処理
+        // 配列本体のデータ削除
+        NSInteger row = [indexPath row];
+        [_iphoneModels removeObjectAtIndex:row];
+        // 表示上のセル削除
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    
+    // 編集ボタン
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"edit" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        // 編集ボタンの処理はここ
+        NSLog(@"Edit:%@", indexPath);
+    }];
+    
+    // ボタンの数はここのreturnで決まる
+    return @[deleteAction, editAction];
+}
+
+// iOS7で必須。iOS8では不要。
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"commitEditingStyle called");
+    // 削除の場合
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // 削除処理
+        // 配列本体のデータ削除
+        NSInteger row = [indexPath row];
+        [_iphoneModels removeObjectAtIndex:row];
+        // 表示上のセル削除
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    // 挿入の場合
+    if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
 }
 
 // 右スワイプ時の動作定義

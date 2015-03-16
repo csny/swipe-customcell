@@ -11,8 +11,8 @@
 
 @interface RootViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
- // インスタンス変数iphoneModelsを準備
-@property NSArray *iphoneModels;
+// property*iphoneModelsは手入力、インスタンス変数iphoneModelsを準備
+@property NSMutableArray *iphoneModels;
 - (IBAction)swipedRight:(id)sender;
 
 

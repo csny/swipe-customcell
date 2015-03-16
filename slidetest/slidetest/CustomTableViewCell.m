@@ -20,6 +20,7 @@
     // Configure the view for the selected state
 }
 
+// セルの高さのクラスメソッド
 + (CGFloat)rowHeight
 {
     return 60.0f;
