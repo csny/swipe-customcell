@@ -22,6 +22,7 @@
 // セルの高さのクラスメソッド
 + (CGFloat)rowHeight
 {
+    // xibのCellのSizeInspectorのRowHeightから転載
     return 60.0f;
 }
 
