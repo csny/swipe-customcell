@@ -10,7 +10,6 @@
 #import "CustomTableViewCell.h"
 
 @interface RootViewController : UITableViewController
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)swipedRight:(id)sender;
 // property*iphoneModelsは手入力、インスタンス変数iphoneModelsを準備
 @property NSMutableArray *iphoneModels;
